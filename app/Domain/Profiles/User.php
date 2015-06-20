@@ -1,35 +1,23 @@
-<?php
-
-namespace App;
+<?php namespace App\Domain\Profiles;
 
 use Illuminate\Auth\Authenticatable;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Auth\Passwords\CanResetPassword;
 use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
-use Illuminate\Contracts\Auth\CanResetPassword as CanResetPasswordContract;
 
-class User extends Model implements AuthenticatableContract, CanResetPasswordContract
-{
-    use Authenticatable, CanResetPassword;
+class User extends Model implements AuthenticatableContract {
 
-    /**
-     * The database table used by the model.
-     *
-     * @var string
-     */
+    use Authenticatable;
+
     protected $table = 'users';
+    protected $fillable = ['username', 'password'];
+    protected $hidden = ['password'];
 
     /**
-     * The attributes that are mass assignable.
-     *
-     * @var array
+     * Relationships
      */
-    protected $fillable = ['name', 'email', 'password'];
+    public function files()
+    {
+        return $this->hasMany('App\Domain\Files\File');
+    }
 
-    /**
-     * The attributes excluded from the model's JSON form.
-     *
-     * @var array
-     */
-    protected $hidden = ['password', 'remember_token'];
 }
