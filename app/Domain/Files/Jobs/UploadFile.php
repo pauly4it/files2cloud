@@ -54,7 +54,7 @@ class UploadFile extends Job implements SelfHandling {
 
         // add file for user
         $fileAdder->add(
-            $user->id,
+            $user,
             $this->file,
             $this->mimeType,
             $this->extension,
