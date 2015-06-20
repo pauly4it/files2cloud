@@ -2,7 +2,8 @@ var FileUploadApp = React.createClass({
 
 	getInitialState: function() {
 		return {
-			files: []
+			files: [],
+			filterText: ''
 		};
 	},
 
@@ -32,6 +33,7 @@ var FileUploadApp = React.createClass({
 				}
 			},
 			success: (response) => {
+				// add all the files received to the current state
 				response.payload.map( (file) => {
 					this.setState({ files: this.state.files.concat({ filename: file.filename, type: file.type, size: file.size }) });
 				});
@@ -43,12 +45,18 @@ var FileUploadApp = React.createClass({
 		alert(message);
 	},
 
+	handleType: function(filterText) {
+		// update the filter text
+		this.setState({ filterText });
+	},
+
 	render: function() {
 		return (
 			<div>
 				<h3>Your Uploaded Files:</h3>
+				<FileSearchBar filterText={ this.state.filterText } onType={ this.handleType } />
 
-				<FileList files={ this.state.files } />
+				<FileList files={ this.state.files } filterText={ this.state.filterText } />
 			</div>
 		);
 	}

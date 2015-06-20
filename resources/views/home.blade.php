@@ -70,6 +70,7 @@
         });
     </script>
     <script type="text/jsx;harmony=true" src="/js/FileList.js"></script>
+    <script type="text/jsx;harmony=true" src="/js/FileSearchBar.js"></script>
     <script type="text/jsx;harmony=true" src="/js/FileUploadApp.js"></script>
 </body>
 </html>
