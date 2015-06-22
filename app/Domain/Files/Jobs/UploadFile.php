@@ -50,7 +50,7 @@ class UploadFile extends Job implements SelfHandling {
         $user = $existenceChecker->check($this->username);
 
         // check if file is a valid file
-        $validator->validate($this->file);
+        $validator->validate($this->file, $this->filename);
 
         // add file for user
         $fileAdder->add(
