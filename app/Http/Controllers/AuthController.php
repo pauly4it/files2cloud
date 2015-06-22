@@ -2,12 +2,40 @@
 
 use App\Domain\Core\NotAuthorizedException;
 use App\Domain\Core\ValidationException;
+use App\Domain\Profiles\Jobs\DisplayLogIn;
 use App\Domain\Profiles\Jobs\RegisterUser;
 use App\Domain\Profiles\Jobs\LogIn;
 use Illuminate\Http\Request;
 
-class AuthController extends Controller
-{
+class AuthController extends Controller {
+
+    /**
+     * Display the register/log in view
+     *
+     * @return array|mixed
+     */
+    public function index()
+    {
+        try
+        {
+            $data = $this->dispatch(
+                new DisplayLogIn()
+            );
+        }
+        catch (NotAuthorizedException $e)
+        {
+            // user is not logged in yet
+            return view('login');
+        }
+        catch (\Exception $e)
+        {
+            return view('login');
+        }
+
+        // direct to home
+        return redirect()->route('home', $data);
+    }
+
     /**
      * Register a new user
      *

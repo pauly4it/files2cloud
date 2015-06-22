@@ -1,12 +1,40 @@
 <?php namespace App\Http\Controllers;
 
+use App\Domain\Core\NotAuthorizedException;
 use App\Domain\Core\NotFoundException;
 use App\Domain\Core\ValidationException;
+use App\Domain\Files\Jobs\DisplayHome;
 use App\Domain\Files\Jobs\GetUserFiles;
 use App\Domain\Files\Jobs\UploadFile;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Crypt;
 
 class FileController extends APIController {
+
+    public function index(Request $request)
+    {
+        try
+        {
+            $data = $this->dispatch(
+                new DisplayHome(
+                    $request->route('username')
+                )
+            );
+        }
+        catch (NotAuthorizedException $e)
+        {
+            // user is not logged in yet or usernames do not match
+            return redirect()->route('auth');
+        }
+        catch (\Exception $e)
+        {
+            return redirect()->route('auth');
+        }
+
+        // return CSRF token to be used with AJAX requests
+        return view('home', $data)
+            ->withEncryptedCsrfToken(Crypt::encrypt(csrf_token()));
+    }
 
     /**
      * Get all of a user's uploaded files.
@@ -14,7 +42,7 @@ class FileController extends APIController {
      * @param Request $request
      * @return array|mixed
      */
-    public function index(Request $request)
+    public function getFiles(Request $request)
     {
         try
         {

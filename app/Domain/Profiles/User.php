@@ -9,7 +9,7 @@ class User extends Model implements AuthenticatableContract {
     use Authenticatable;
 
     protected $table = 'users';
-    protected $fillable = ['username', 'password'];
+    protected $fillable = ['username', 'password', 'remember_token'];
     protected $hidden = ['password'];
 
     /**

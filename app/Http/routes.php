@@ -1,11 +1,10 @@
 <?php
 
-// login view, no remember session yet
-Route::get('/', function () {
-    return view('login');
-});
-
 // Auth Routes
+Route::get('/', [
+    'uses' => 'AuthController@index',
+    'as' => 'auth'
+]);
 Route::post('auth/login', [
     'uses' => 'AuthController@login',
     'as' => 'auth.login'
@@ -16,19 +15,16 @@ Route::post('auth/register', [
 ]);
 
 // Main app route
-Route::get('users/{username}/home', ['as' => 'home', function($username) {
-
-    // return view with username
-    // also return CSRF token so that React can use that for API calls
-    return view('home', ['username' => $username])
-        ->withEncryptedCsrfToken(Crypt::encrypt(csrf_token()));
-}]);
+Route::get('users/{username}/home', [
+    'uses' => 'FileController@index',
+    'as' => 'home'
+]);
 
 // API routes
 // CSRF check necessary
 //Route::group(['middleware' => 'csrf'], function()
 //{
     // File Routes
-    Route::get('users/{username}/files', 'FileController@index');
+    Route::get('users/{username}/files', 'FileController@getFiles');
     Route::post('users/{username}/files', 'FileController@store');
 //});

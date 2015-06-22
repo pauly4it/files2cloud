@@ -5,6 +5,7 @@ use App\Domain\Profiles\Repositories\UserRepositoryInterface;
 use App\Domain\Profiles\Services\RegistrationValidator;
 use App\Domain\Profiles\Services\UserFormatter;
 use Illuminate\Contracts\Bus\SelfHandling;
+use Illuminate\Support\Facades\Auth;
 
 class RegisterUser extends Job implements SelfHandling {
 
@@ -41,6 +42,9 @@ class RegisterUser extends Job implements SelfHandling {
 
         // create user
         $user = $userRepo->create($credentials['username'], $credentials['password']);
+
+        // log user in and remember the user
+        Auth::login($user, true);
 
         // format user object
         return $formatter->format($user);

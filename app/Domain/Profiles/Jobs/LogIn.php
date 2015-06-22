@@ -2,11 +2,10 @@
 
 use App\Domain\Core\Job;
 use App\Domain\Core\NotAuthorizedException;
-use App\Domain\Profiles\Repositories\UserRepositoryInterface;
 use App\Domain\Profiles\Services\UserValidator;
 use App\Domain\Profiles\Services\UserFormatter;
 use Illuminate\Contracts\Bus\SelfHandling;
-use Auth;
+use Illuminate\Support\Facades\Auth;
 
 class LogIn extends Job implements SelfHandling {
 
@@ -24,14 +23,12 @@ class LogIn extends Job implements SelfHandling {
      * Log a user in.
      *
      * @param UserValidator $validator
-     * @param UserRepositoryInterface $userRepo
      * @param UserFormatter $formatter
      * @return array
      * @throws NotAuthorizedException
      * @throws \App\Domain\Core\ValidationException
      */
     public function handle(UserValidator $validator,
-                           UserRepositoryInterface $userRepo,
                            UserFormatter $formatter)
     {
         $credentials = [
@@ -42,8 +39,8 @@ class LogIn extends Job implements SelfHandling {
         // validate user data
         $validator->validate($credentials);
 
-        // authenticate user
-        if (Auth::attempt($credentials))
+        // authenticate user and remember the user
+        if (Auth::attempt($credentials, true))
         {
             // format user object
             return $formatter->format(Auth::user());
