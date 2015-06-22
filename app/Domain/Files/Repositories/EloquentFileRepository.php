@@ -30,4 +30,8 @@ class EloquentFileRepository implements FileRepositoryInterface {
         return $this->file->where('user_id', $userId)->get();
     }
 
+    public function getByUserIdAndFilename($userId, $filename)
+    {
+        return $this->file->where('user_id', $userId)->where('filename', $filename)->first();
+    }
 }

@@ -31,4 +31,5 @@ Route::get('users/{username}/home', [
     // File Routes
     Route::get('users/{username}/files', 'FileController@getFiles');
     Route::post('users/{username}/files', 'FileController@store');
+    Route::get('users/{username}/files/{filename}', 'FileController@download');
 //});

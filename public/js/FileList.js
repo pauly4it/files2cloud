@@ -11,9 +11,11 @@ var FileList = React.createClass({
 		// go through each file and see if it matches the filter text
 		var rows = [];
 		this.props.files.forEach( (file) => {
+			var path = '/users/' + window.config.username + '/files/' + file.filename;
+
 			if (file.filename.indexOf(this.props.filterText) !== -1)
 			{
-				rows.push(<li>{file.filename} / Type: {file.type} / ({file.size / 1000}KB)</li>)
+				rows.push(<li>{file.filename} ({file.size / 1000}KB) <a href={ path } target="_blank">Download</a></li>)
 			}
 		});
 

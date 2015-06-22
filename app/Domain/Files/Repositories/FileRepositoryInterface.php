@@ -22,4 +22,13 @@ interface FileRepositoryInterface {
      */
     public function getAllByUserId($userId);
 
+    /**
+     * Get the file for the user with the given filename.
+     *
+     * @param $userId
+     * @param $filename
+     * @return mixed
+     */
+    public function getByUserIdAndFilename($userId, $filename);
+
 }

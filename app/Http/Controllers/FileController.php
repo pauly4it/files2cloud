@@ -4,6 +4,7 @@ use App\Domain\Core\NotAuthorizedException;
 use App\Domain\Core\NotFoundException;
 use App\Domain\Core\ValidationException;
 use App\Domain\Files\Jobs\DisplayHome;
+use App\Domain\Files\Jobs\DownloadFile;
 use App\Domain\Files\Jobs\GetUserFiles;
 use App\Domain\Files\Jobs\UploadFile;
 use Illuminate\Http\Request;
@@ -102,6 +103,39 @@ class FileController extends APIController {
         }
 
         return redirect()->route('home', $data)->with('success', 'Your file has been uploaded!');
+    }
+
+    /**
+     * Initiate a download for the specified file.
+     *
+     * @param Request $request
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function download(Request $request)
+    {
+        try
+        {
+            $data = $this->dispatch(
+                new DownloadFile(
+                    $request->route('username'),
+                    $request->route('filename')
+                )
+            );
+        }
+        catch (NotAuthorizedException $e)
+        {
+            return back()->with('message', $e->getMessage());
+        }
+        catch (NotFoundException $e)
+        {
+            return back()->with('message', $e->getMessage());
+        }
+        catch (\Exception $e)
+        {
+            return back()->with('message', $e->getMessage());
+        }
+
+        return response()->make($data['file'], 200)->header('Content-Type', $data['mime']);
     }
 
 }

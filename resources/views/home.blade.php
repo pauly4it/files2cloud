@@ -47,6 +47,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/react/0.13.1/JSXTransformer.js"></script>
     <script src="http://code.jquery.com/jquery.js"></script>
     <script>
+        window.config = { username: "{{ $username }}" };
         // when a file is selected
         $('#fileUpload').bind('change', function() {
             // check the file size
