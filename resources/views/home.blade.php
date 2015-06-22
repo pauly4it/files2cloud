@@ -15,6 +15,9 @@
             <div id="company">
                 <img src="/images/logo.png" height="40px" />
             </div>
+            <div id="logout">
+                <a href="{{ route('auth.logout') }}">Log Out</a>
+            </div>
         </div>
     </div>
 

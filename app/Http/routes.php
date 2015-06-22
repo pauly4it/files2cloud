@@ -13,6 +13,10 @@ Route::post('auth/register', [
     'uses' => 'AuthController@create',
     'as' => 'auth.register'
 ]);
+Route::get('auth/logout', [
+    'uses' => 'AuthController@logout',
+    'as' => 'auth.logout'
+]);
 
 // Main app route
 Route::get('users/{username}/home', [

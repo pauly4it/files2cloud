@@ -91,6 +91,8 @@ h1,h2,h3,h4,h5,h6 {
     padding: 8px;
     padding-left: 15px;
     padding-bottom: 4px;
+    height: 43px;
+    position: relative;
 }
 
 .alert-danger {
@@ -114,6 +116,7 @@ h1,h2,h3,h4,h5,h6 {
     font-family: 'Raleway', sans-serif;
     font-weight: 900;
     font-size: 20px;
+    float: left;
 }
 
 ul {
@@ -139,4 +142,25 @@ li:nth-child(2n) {
 
 #instructions {
     margin-bottom: 8px;
+}
+
+.filter-box {
+    padding: 5px;
+    border: none;
+    width: 190px;
+    border-radius: 0;
+    background: #0580FF;
+    color: white;
+}
+
+#logout {
+    float: right;
+    position: relative;
+    margin-top: 8px;
+    margin-right: 10px;
+}
+
+#logout a {
+    color: white;
+    font-weight: bold;
 }

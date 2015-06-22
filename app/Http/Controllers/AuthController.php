@@ -3,6 +3,7 @@
 use App\Domain\Core\NotAuthorizedException;
 use App\Domain\Core\ValidationException;
 use App\Domain\Profiles\Jobs\DisplayLogIn;
+use App\Domain\Profiles\Jobs\LogOut;
 use App\Domain\Profiles\Jobs\RegisterUser;
 use App\Domain\Profiles\Jobs\LogIn;
 use Illuminate\Http\Request;
@@ -94,5 +95,27 @@ class AuthController extends Controller {
         }
 
         return redirect()->route('home', $data);
+    }
+
+    /**
+     * Log the user out.
+     *
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function logout()
+    {
+        try
+        {
+            $this->dispatch(
+                new LogOut()
+            );
+        }
+        catch (\Exception $e)
+        {
+            return redirect()->route('auth');
+        }
+
+        // user is not logged in yet
+        return redirect()->route('auth');
     }
 }
