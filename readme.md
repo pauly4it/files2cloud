@@ -22,12 +22,10 @@ This package is best run on Vagrant, using Vaprobash (or Homestead).
 
 ## To-Dos
 
-- Guard against trying to access another user's upload page with something other than a javascript alert.
 - If the user is uploading a file that matches the name of an existing file, make the user aware that they'll overwrite the existing file (or give them a choice to rename the new file).
 - Complete the file upload via an ajax request and avoid page refresh on form submit (alternatively this could be done in an iframe).
 - Make the file upload size-limit configurable.
 - Provide a progress indicator of the upload.
 - Combine the log in/registration forms into one form that uses a UI switch to choose between one and the other without a page reload.
-- Use Gulp and browserify to combine the React component files into an app.js file.
+- Use Gulp and babelify to combine the React component files into an app.js file.
 - Use npm to pull in dependencies (like React and jQuery).
-- Use local/session storage to store a token so that users can skip the login page.
