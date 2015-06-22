@@ -29,7 +29,7 @@ class FileValidator {
         }
 
         // check if the file name is composed of printable ASCII characters, Hex values 20-7E
-        if (preg_match('/[^\x20-\x7E]/', $filename) == 0)
+        if (preg_match('/[^\x20-\x7E]/', $filename) != 0)
         {
             throw new ValidationException('Your filename contains non-ASCII characters. Please rename the file and try the upload again.');
         }

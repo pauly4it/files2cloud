@@ -2,7 +2,6 @@
 
 use App\Domain\Core\Job;
 use App\Domain\Files\Services\FileAdder;
-use App\Domain\Files\Services\FileFormatter;
 use App\Domain\Files\Services\FileValidator;
 use App\Domain\Profiles\Services\UserExistenceChecker;
 use Illuminate\Contracts\Bus\SelfHandling;

@@ -23,18 +23,10 @@
 
     <div class="center">
         <div id="welcome"><h1>Welcome {{ $username }}!</h1></div>
-        @if (count($errors) > 0)
+        @if (session('message') !== null)
             <div class="alert-danger">
-                <strong>Whoops!</strong> There were some problems with your input.
-                <ul>
-                    @foreach ($errors as $error)
-                        <li>{{ $error }}</li>
-                    @endforeach
-                </ul>
-            </div>
-        @elseif (session('message') !== null)
-            <div class="alert-danger">
-                <strong>Whoops!</strong> We're not sure what happened, but something went wrong. Try refreshing the page.<br>
+                <strong>Whoops!</strong> Something went wrong:<br>
+                {{ session('message') }}
             </div>
         @elseif (session('success') !== null)
             <div class="alert-success">

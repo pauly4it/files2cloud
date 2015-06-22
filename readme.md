@@ -29,3 +29,4 @@ This package is best run on Vagrant, using Vaprobash (or Homestead).
 - Combine the log in/registration forms into one form that uses a UI switch to choose between one and the other without a page reload.
 - Use Gulp and babelify to combine the React component files into an app.js file.
 - Use npm to pull in dependencies (like React and jQuery).
+- Allow a user to delete their files.

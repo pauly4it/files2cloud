@@ -90,11 +90,11 @@ class FileController extends APIController {
         }
         catch (ValidationException $e)
         {
-            return back()->with('errors', $e->getErrors()->all());
+            return back()->with('message', $e->getMessage());
         }
         catch (NotFoundException $e)
         {
-            return back()->with('errors', $e->getErrors());
+            return back()->with('message', $e->getMessage());
         }
         catch (\Exception $e)
         {
